@@ -49,6 +49,16 @@ const App: React.FC = () => {
           This companion app is not part of the official Arkham Horror Investigator Gamebooks and is
           not affiliated with or endorsed by Fantasy Flight Games or Aconyte Books.
         </p>
+        <p className="text-sm dark:text-slate-400 text-stone-600 mt-2">
+          <a
+            href="https://buymeacoffee.com/sergesarapov"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-rose-700 hover:underline"
+          >
+            Support the developer
+          </a>
+        </p>
       </footer>
     </div>
   );
