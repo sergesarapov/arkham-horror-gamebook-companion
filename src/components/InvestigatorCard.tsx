@@ -11,9 +11,7 @@ const inputCls =
 const labelCls = 'block text-sm dark:text-slate-400 font-medium text-stone-700';
 const counterBtnCls = (color: 'green' | 'red') =>
   `px-2 py-1 rounded text-white text-sm transition-colors ${
-    color === 'green'
-      ? 'bg-emerald-700 hover:bg-emerald-800'
-      : 'bg-red-800 hover:bg-red-900'
+    color === 'green' ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-red-800 hover:bg-red-900'
   }`;
 
 interface StatBoxProps {
@@ -28,7 +26,11 @@ const StatBox: React.FC<StatBoxProps> = ({ label, value, suffix }) => (
     </span>
     <span className="text-2xl font-bold dark:text-white text-stone-900">
       {value}
-      {suffix && <span className="text-base font-normal text-stone-500 dark:text-slate-400 ml-1">{suffix}</span>}
+      {suffix && (
+        <span className="text-base font-normal text-stone-500 dark:text-slate-400 ml-1">
+          {suffix}
+        </span>
+      )}
     </span>
   </div>
 );
@@ -41,14 +43,31 @@ interface CounterRowProps {
   min?: number;
   warning?: string;
 }
-const CounterRow: React.FC<CounterRowProps> = ({ label, value, onIncrement, onDecrement, min, warning }) => (
+const CounterRow: React.FC<CounterRowProps> = ({
+  label,
+  value,
+  onIncrement,
+  onDecrement,
+  min,
+  warning,
+}) => (
   <div className="flex items-center gap-3 flex-wrap">
     <span className="text-sm font-semibold tracking-wide uppercase text-rose-800 dark:text-rose-400 w-24">
       {label}
     </span>
-    <span className="text-2xl font-bold dark:text-white text-stone-900 w-10 text-center">{value}</span>
-    <button onClick={onIncrement} className={counterBtnCls('green')}>+1</button>
-    <button onClick={onDecrement} disabled={min !== undefined && value <= min} className={counterBtnCls('red')}>−1</button>
+    <span className="text-2xl font-bold dark:text-white text-stone-900 w-10 text-center">
+      {value}
+    </span>
+    <button onClick={onIncrement} className={counterBtnCls('green')}>
+      +1
+    </button>
+    <button
+      onClick={onDecrement}
+      disabled={min !== undefined && value <= min}
+      className={counterBtnCls('red')}
+    >
+      −1
+    </button>
     {warning && value < 0 && (
       <span className="text-xs text-red-700 dark:text-red-400">{warning}</span>
     )}
@@ -58,12 +77,17 @@ const CounterRow: React.FC<CounterRowProps> = ({ label, value, onIncrement, onDe
 const sectionTitle = (text: string) => (
   <div className="flex items-center gap-3 my-4">
     <div className="flex-1 border-t border-stone-300 dark:border-slate-600" />
-    <span className="text-xs font-bold tracking-widest uppercase text-stone-500 dark:text-slate-400">{text}</span>
+    <span className="text-xs font-bold tracking-widest uppercase text-stone-500 dark:text-slate-400">
+      {text}
+    </span>
     <div className="flex-1 border-t border-stone-300 dark:border-slate-600" />
   </div>
 );
 
-export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator, setInvestigator }) => {
+export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({
+  investigator,
+  setInvestigator,
+}) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [local, setLocal] = useState<Investigator>(investigator);
 
@@ -74,11 +98,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setLocal((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLocal((prev) => ({ ...prev, [name]: value === '' ? 0 : +value }));
   };
 
   const inc = (field: keyof Investigator) =>
@@ -109,6 +128,12 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
     setLocal((prev) => ({ ...prev, otherWeaknesses: weaknesses }));
   };
 
+  const setSecret = (index: number, value: string) => {
+    const secrets = [...local.secrets] as [string, string, string];
+    secrets[index] = value;
+    setLocal((prev) => ({ ...prev, secrets }));
+  };
+
   const effectiveCombat = local.combat + Math.min(0, local.health);
   const effectiveWillpower = local.willpower + Math.min(0, local.sanity);
   const healthPenalty = Math.abs(Math.min(0, local.health));
@@ -126,7 +151,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
             Save
           </button>
         </div>
-
         <div className="mb-4">
           <label className={labelCls}>Name</label>
           <input
@@ -138,7 +162,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
             className={`${inputCls} w-full max-w-sm`}
           />
         </div>
-
         <div className="grid grid-cols-3 gap-4 mb-4">
           {(['willpower', 'intellect', 'combat'] as const).map((stat) => (
             <div key={stat}>
@@ -147,24 +170,34 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
                 type="number"
                 name={stat}
                 value={local[stat]}
-                onChange={handleNumChange}
+                onChange={handleChange}
                 className={`${inputCls} w-full`}
               />
             </div>
           ))}
         </div>
-
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label className={labelCls}>Health</label>
-            <input type="number" name="health" value={local.health} onChange={handleNumChange} className={`${inputCls} w-full`} />
+            <input
+              type="number"
+              name="health"
+              value={local.health}
+              onChange={handleChange}
+              className={`${inputCls} w-full`}
+            />
           </div>
           <div>
             <label className={labelCls}>Sanity</label>
-            <input type="number" name="sanity" value={local.sanity} onChange={handleNumChange} className={`${inputCls} w-full`} />
+            <input
+              type="number"
+              name="sanity"
+              value={local.sanity}
+              onChange={handleChange}
+              className={`${inputCls} w-full`}
+            />
           </div>
         </div>
-
         <div className="grid grid-cols-3 gap-4 mb-4">
           {(['resources', 'clues', 'doom'] as const).map((stat) => (
             <div key={stat}>
@@ -173,14 +206,13 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
                 type="number"
                 name={stat}
                 value={local[stat]}
-                onChange={handleNumChange}
+                onChange={handleChange}
                 min="0"
                 className={`${inputCls} w-full`}
               />
             </div>
           ))}
         </div>
-
         {sectionTitle('Items')}
         <div className="mb-3">
           <label className={labelCls}>Starting Item</label>
@@ -205,7 +237,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
             </div>
           ))}
         </div>
-
         {sectionTitle('Abilities')}
         <div className="mb-3">
           <label className={labelCls}>Major Ability</label>
@@ -230,7 +261,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
             </div>
           ))}
         </div>
-
         {sectionTitle('Weaknesses')}
         <div className="mb-3">
           <label className={labelCls}>Major Weakness</label>
@@ -255,7 +285,19 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
             </div>
           ))}
         </div>
-
+        {sectionTitle('Secrets')}
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          {local.secrets.map((s, i) => (
+            <div key={i}>
+              <textarea
+                value={s}
+                onChange={(e) => setSecret(i, e.target.value)}
+                rows={3}
+                className={`${inputCls} w-full`}
+              />
+            </div>
+          ))}
+        </div>
         <button
           onClick={() => setIsEditMode(false)}
           className="bg-rose-800 text-white px-4 py-2 rounded hover:bg-rose-900 transition-colors"
@@ -281,7 +323,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
           Edit
         </button>
       </div>
-
       {/* Base stats */}
       <div className="flex gap-2 mb-4">
         <StatBox
@@ -296,7 +337,6 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
           suffix={healthPenalty > 0 ? `→ ${effectiveCombat}` : undefined}
         />
       </div>
-
       {/* Tracked values */}
       <div className="space-y-3 mb-4 dark:bg-zinc-800 bg-stone-50 rounded p-3">
         <CounterRow
@@ -336,16 +376,19 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
           min={0}
         />
       </div>
-
       {/* Items */}
       {sectionTitle('Items')}
       <div className="mb-3">
-        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Starting Item</p>
+        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+          Starting Item
+        </p>
         <div className="border border-stone-300 dark:border-slate-600 rounded p-2 min-h-[48px] text-sm dark:text-slate-200 text-stone-800 whitespace-pre-wrap">
           {local.startingItem || <span className="text-stone-400 italic">—</span>}
         </div>
       </div>
-      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Other Items</p>
+      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+        Other Items
+      </p>
       <div className="grid grid-cols-3 gap-3 mb-4">
         {local.otherItems.map((item, i) => (
           <div key={i}>
@@ -355,16 +398,19 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
           </div>
         ))}
       </div>
-
       {/* Abilities */}
       {sectionTitle('Abilities')}
       <div className="mb-3">
-        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Major Ability</p>
+        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+          Major Ability
+        </p>
         <div className="border border-stone-300 dark:border-slate-600 rounded p-2 min-h-[48px] text-sm dark:text-slate-200 text-stone-800 whitespace-pre-wrap">
           {local.majorAbility || <span className="text-stone-400 italic">—</span>}
         </div>
       </div>
-      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Other Abilities</p>
+      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+        Other Abilities
+      </p>
       <div className="grid grid-cols-3 gap-3 mb-4">
         {local.otherAbilities.map((ab, i) => (
           <div key={i}>
@@ -374,21 +420,35 @@ export const InvestigatorCard: React.FC<InvestigatorCardProps> = ({ investigator
           </div>
         ))}
       </div>
-
       {/* Weaknesses */}
       {sectionTitle('Weaknesses')}
       <div className="mb-3">
-        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Major Weakness</p>
+        <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+          Major Weakness
+        </p>
         <div className="border border-stone-300 dark:border-slate-600 rounded p-2 min-h-[48px] text-sm dark:text-slate-200 text-stone-800 whitespace-pre-wrap">
           {local.majorWeakness || <span className="text-stone-400 italic">—</span>}
         </div>
       </div>
-      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">Other Weaknesses</p>
+      <p className="text-xs font-bold tracking-wide uppercase text-stone-500 dark:text-slate-400 mb-1">
+        Other Weaknesses
+      </p>
       <div className="grid grid-cols-3 gap-3 mb-4">
         {local.otherWeaknesses.map((w, i) => (
           <div key={i}>
             <div className="border border-stone-300 dark:border-slate-600 rounded p-2 min-h-[64px] text-sm dark:text-slate-200 text-stone-800 whitespace-pre-wrap">
               {w || <span className="text-stone-400 italic">—</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Secrets */}
+      {sectionTitle('Secrets')}
+      <div className="grid grid-cols-3 gap-3 mb-4">
+        {local.secrets.map((s, i) => (
+          <div key={i}>
+            <div className="border border-stone-300 dark:border-slate-600 rounded p-2 min-h-[64px] text-sm dark:text-slate-200 text-stone-800 whitespace-pre-wrap">
+              {s || <span className="text-stone-400 italic">—</span>}
             </div>
           </div>
         ))}

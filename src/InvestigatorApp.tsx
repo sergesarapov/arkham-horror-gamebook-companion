@@ -23,6 +23,7 @@ const EMPTY_INVESTIGATOR = (_slug: string): Investigator => ({
   otherAbilities: ['', '', ''],
   majorWeakness: '',
   otherWeaknesses: ['', '', ''],
+  secrets: ['', '', ''],
 });
 
 const storageKey = (slug: string) => `arkgb-investigator-${slug}`;
