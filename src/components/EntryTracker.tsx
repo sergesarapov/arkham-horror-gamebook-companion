@@ -45,7 +45,7 @@ export const EntryTracker: React.FC<EntryTrackerProps> = ({ slug }) => {
           Entry №:
         </label>
         <input
-          type="text"
+          type="number"
           value={currentEntry}
           onChange={(e) => setCurrentEntry(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAddEntry()}

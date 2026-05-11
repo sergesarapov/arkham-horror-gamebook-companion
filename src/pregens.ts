@@ -22,6 +22,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'HUNTED BY THE MOB – Each time you gain a RESOURCE, roll a die. If the score is below your current number of RESOURCE, do not gain a RESOURCE.',
     otherWeaknesses: ['Criminal', '', ''],
+    secrets: ['', '', ''],
   },
   rex_murphy: {
     name: 'Rex Murphy',
@@ -41,6 +42,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       "REX'S CURSE – If you roll a double when using your INTELLECT or WILLPOWER, treat the score on each dice as a 1.",
     otherWeaknesses: ['Cursed', '', ''],
+    secrets: ['', '', ''],
   },
   kohaku_narukami: {
     name: 'Kōhaku Narukami',
@@ -61,6 +63,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'WEEPING YŪREI – When you fail a WILLPOWER test, roll a die and add your COMBAT. If the total sum is equal to or less than the current DOOM, lose 1 HEALTH.',
     otherWeaknesses: ['Cursed', 'Haunted', ''],
+    secrets: ['', '', ''],
   },
   marion_tavares: {
     name: 'Marion Tavares',
@@ -80,6 +83,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       "I'LL DO IT MYSELF – Each time you lose SANITY or HEALTH roll a die. If the score is below your current SANITY or HEALTH (as appropriate), gain +1 DOOM. If you lose SANITY and HEALTH at the same time, choose one to apply the effect (your choice).",
     otherWeaknesses: ['', '', ''],
+    secrets: ['', '', ''],
   },
   silas_marsh: {
     name: 'Silas Marsh',
@@ -100,6 +104,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       "SIREN'S CALL – Each time you gain DOOM, spend a RESOURCE. Otherwise, gain 1 additional DOOM.",
     otherWeaknesses: ['Tainted Lineage', '', ''],
+    secrets: ['', '', ''],
   },
   skids_otoole: {
     name: "Skids O'Toole",
@@ -120,6 +125,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'HOSPITAL DEBTS – When you spend a RESOURCE, lose one additional RESOURCE (if you have one).',
     otherWeaknesses: ['Criminal', '', ''],
+    secrets: ['', '', ''],
   },
   sister_mary: {
     name: 'Sister Mary',
@@ -140,6 +146,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'CRISIS OF FAITH – Each time you gain DOOM, roll 1 die. If you roll a 4 or higher, spend 2 RESOURCES or lose 1 SANITY.',
     otherWeaknesses: ['Watched', 'Paranoid', ''],
+    secrets: ['', '', ''],
   },
   george_barnaby: {
     name: 'George Barnaby',
@@ -160,6 +167,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'CAST ADRIFT – If you spend a RESOURCE during a Skill test, and the Skill test is not successful, lose 3 RESOURCE.',
     otherWeaknesses: ['Grief', 'Criminal', ''],
+    secrets: ['', '', ''],
   },
   amanda_sharpe: {
     name: 'Amanda Sharpe',
@@ -179,6 +187,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'WHISPERS OF THE DEEP – Whenever you lose SANITY, also lose 1 RESOURCE or 1 CLUE (your choice).',
     otherWeaknesses: ['Troubled Dreams', '', ''],
+    secrets: ['', '', ''],
   },
   stella_clark: {
     name: 'Stella Clark',
@@ -199,6 +208,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'CALLED BY THE MISTS – Whenever you lose SANITY, roll one dice. (If you are in Kingsport, roll two dice and pick the highest.) If the score is higher than your current SANITY, lose 1 RESOURCE.',
     otherWeaknesses: ['Haunted', '', ''],
+    secrets: ['', '', ''],
   },
   lola_hayes: {
     name: 'Lola Hayes',
@@ -219,6 +229,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'CRISIS OF IDENTITY – Each time you spend a RESOURCE, roll 1 dice. If you roll a 1, lose 1 SANITY.',
     otherWeaknesses: ['Haunted', 'Cursed', 'Cautious'],
+    secrets: ['', '', ''],
   },
   lucius_galloway: {
     name: 'Lucius Galloway',
@@ -239,6 +250,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'DREAMS OF THE FLOOD – Each time you gain a CLUE, roll 1 dice. If the number is lower than your current number of CLUES, do not take a CLUE.',
     otherWeaknesses: ['Troubled Dreams', '', ''],
+    secrets: ['', '', ''],
   },
   jacqueline_fine: {
     name: 'Jacqueline Fine',
@@ -259,6 +271,7 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'DARK FUTURE – If you roll a double during a test, gain +1 DOOM and the test is automatically unsuccessful.',
     otherWeaknesses: ['Troubled Dreams', 'Paranoia', ''],
+    secrets: ['', '', ''],
   },
   agnes_baker: {
     name: 'Agnes Baker',
@@ -279,5 +292,6 @@ export const PREGENS: Record<string, PregenTemplate> = {
     majorWeakness:
       'DARK MEMORIES – Each time you spend a CLUE, roll a dice. On a roll of a 1, Agnes loses -1 SANITY.',
     otherWeaknesses: ['Haunted', '', ''],
+    secrets: ['', '', ''],
   },
 };

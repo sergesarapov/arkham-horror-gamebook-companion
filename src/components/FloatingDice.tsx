@@ -20,7 +20,7 @@ export const FloatingDice: React.FC = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2" ref={panelRef}>
       {isOpen && (
-        <div className="bg-stone-50 dark:bg-zinc-800 rounded-xl shadow-xl p-4 w-60 flex flex-col gap-3 border border-stone-200 dark:border-zinc-700">
+        <div className="bg-stone-50 dark:bg-zinc-800 rounded-xl shadow-xl p-4 w-[200px] flex flex-col gap-3 border border-stone-200 dark:border-zinc-700">
           <DiceRoller title="d6" d="d6" />
           <DiceRoller title="2d6" d="2d6" />
         </div>

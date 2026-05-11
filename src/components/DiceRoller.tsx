@@ -7,6 +7,17 @@ interface DiceRollerProps {
   d: DiceType;
 }
 
+interface DiceFaceProps {
+  value: number;
+}
+
+export const DiceFace: React.FC<DiceFaceProps> = ({ value }) => (
+  <div className="bg-gradient-to-br from-stone-700 to-stone-800 text-white px-2 py-1 rounded shadow-lg flex items-center justify-center min-w-[40px] h-[40px]">
+    <p className="text-2xl font-bold">{value}</p>
+  </div>
+);
+
+
 export const DiceRoller: React.FC<DiceRollerProps> = ({ title, d }) => {
   const [result, setResult] = useState<number | null>(null);
   const [rolls, setRolls] = useState<[number, number] | null>(null);
@@ -67,13 +78,14 @@ export const DiceRoller: React.FC<DiceRollerProps> = ({ title, d }) => {
 
         {result !== null && (
           <div className="animate-bounce-in">
-            <div className="bg-gradient-to-br from-stone-700 to-stone-800 text-white px-2 py-1 rounded shadow-lg flex items-center justify-center min-w-[40px] h-[40px]">
-              {rolls !== null ? (
-                <p className="text-2xl font-bold">{rolls[0]} + {rolls[1]} = {result}</p>
-              ) : (
-                <p className="text-2xl font-bold">{result}</p>
-              )}
-            </div>
+            {rolls !== null ? (
+              <div className="flex flex-row gap-3">
+                <DiceFace value={rolls[0]} />
+                <DiceFace value={rolls[1]} />
+              </div>
+            ) : (
+              <DiceFace value={result} />
+            )}
           </div>
         )}
       </div>

@@ -15,6 +15,7 @@ export interface Investigator {
   otherAbilities: [string, string, string];
   majorWeakness: string;
   otherWeaknesses: [string, string, string];
+  secrets: [string, string, string];
 }
 
 export interface LogEntryType {
